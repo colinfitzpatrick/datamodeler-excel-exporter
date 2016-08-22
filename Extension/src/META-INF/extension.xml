@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<extension xmlns="http://jcp.org/jsr/198/extension-manifest"
+  id="com.xsynergy.dm.excelexporter"
+  version="0.1"
+  esdk-version="1.0">
+           
+  <name>An extension for Oracle SQL*Developer Data Modeler to export subviews to excel</name>
+  <owner>Colin Fitzpatrick</owner>
+  
+  <feature-member id="esdk-samples" xmlns="http://xmlns.oracle.com/ide/extension"/>
+
+  <trigger-hooks xmlns="http://xmlns.oracle.com/ide/extension">
+    <triggers>
+      <gallery xmlns="http://xmlns.oracle.com/jdeveloper/1013/extension">
+        <folders>
+          <name label="Export subviews to excel">Export Subview to Excel</name>
+          <category>JL</category>
+        </folders>
+        <item rule="always-enabled">
+          <!-- name is the fully-qualified name of an oracle.ide.wizard.Invokable  -->
+          <name>com.xsynergy.dm.excelexporter.Wizard</name>
+
+          <!-- id is optional, and if specified will be stored in the Context
+           so it can be retrieved when the wizard is invoked. -->
+          <id>com.xsynergy.dm.excelexporter.Wizard</id>
+
+          <!-- description is the short label of the gallery item -->
+          <description>Export subview to excel</description>
+
+          <!-- help is the long label for the gallery item -->
+          <help>Export subview to excel</help>
+          
+		  <icon>res:/com/xsynergy/dm/excelexporter/colin.png</icon>
+          <category>General</category>
+          <folder>Export Subview to Excel</folder>
+        </item>
+      </gallery>
+
+
+      <!-- 
+        Define an action that will be used in various menus and toolbars.
+        You can set any Swing action property on the action. The controller
+        class implements oracle.ide.controller.Controller and determines
+        when the action is enabled and what it does.
+        
+        You can use an ampersand (escaped as &amp;) in the Name property
+        to specify the mnemonic for any menu items containing the action.
+      -->
+      <actions xmlns="http://xmlns.oracle.com/jdeveloper/1013/extension">
+        <action id="com.xsynergy.dm.excelexporter">
+          <properties>
+            <property name="Name">Export Subview to Excel</property>
+				<property name="SmallIcon">res:/com/xsynergy/dm/excelexporter/colin.png</property>
+          </properties>
+        </action>
+      </actions>
+
+      <controllers xmlns="http://xmlns.oracle.com/ide/extension">
+        <controller class="com.xsynergy.dm.excelexporter.Controller">
+          <update-rules>
+            <update-rule rule="always-enabled">
+              <action id="com.xsynergy.dm.excelexporter">
+                <label>Export Subview to Excel</label>
+              </action>
+            </update-rule>
+          </update-rules>
+        </controller>
+      </controllers>
+    <settings-ui-hook xmlns="http://xmlns.oracle.com/ide/extension">
+      <page id="com.xsynergy.jl.ebo.jlflatfileebo" parent-idref="/preferences">
+        <label>Export Subview to Excel</label>
+        <traversable-class>com.xsynergy.dm.excelexporter.PreferencePanel</traversable-class>
+      </page>
+    </settings-ui-hook>
+      <menu-hook xmlns="http://jcp.org/jsr/198/extension-manifest">
+        <!-- 
+          Add the action in its own separator group at the top of the File 
+          menu. 
+        -->
+        <menus>
+          <menubar id="javax.ide.view.MAIN_WINDOW_MENUBAR_ID">
+            <menu id="javax.ide.VIEW_MENU_ID">
+              <section id="esdksample.customsection" before="javax.ide.NEW_SECTION_ID">
+                <item action-ref="com.xsynergy.dm.excelexporter"></item>
+              </section>
+            </menu>
+          </menubar>
+        </menus>
+      </menu-hook>
+   </triggers>
+ </trigger-hooks>
+</extension>
