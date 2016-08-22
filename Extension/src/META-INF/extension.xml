@@ -2,7 +2,7 @@
 
 <extension xmlns="http://jcp.org/jsr/198/extension-manifest"
   id="com.xsynergy.dm.excelexporter"
-  version="0.1"
+  version="0.2"
   esdk-version="1.0">
            
   <name>An extension for Oracle SQL*Developer Data Modeler to export subviews to excel</name>

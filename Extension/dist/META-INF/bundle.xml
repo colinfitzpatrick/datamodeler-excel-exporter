@@ -2,7 +2,7 @@
                xmlns:u="http://xmlns.oracle.com/jdeveloper/update">
   <u:update id="com.xsynergy.dm.excelexporter">
     <u:name>Flat Excel Subview Exporter</u:name>
-    <u:version>0.1</u:version>
+    <u:version>0.2</u:version>
     <u:author>Colin Fitzpatrick</u:author>
     <u:author-url>http://www.xsynergy.com</u:author-url>
     <u:requirements>

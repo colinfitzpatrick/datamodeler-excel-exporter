@@ -52,6 +52,7 @@ public class Wizard
   {
     try
     { 
+	
                                                           // Wrap everything in an Exception handler to
                                                           // .. prevent errors in DataModeler.
       String subviewName = "";
@@ -61,8 +62,10 @@ public class Wizard
                                                           // (.. double check).
       
       DMDiagramNode node = (DMDiagramNode) context.getNode();
-      subviewName = node.getComponent().getName();
+	  
+      subviewName = node.getComponent().getName();		  // TODO: Throws and exeception for unsaved/empty subviews.
 
+	  
                                                           // Get the current model
       ApplicationView view = ApplicationView.getInstance();
 
@@ -70,13 +73,13 @@ public class Wizard
       Design design = view.getCurrentDesign();
       LogicalDesign logical = design.getLogicalDesign();
       DPVLogicalSubView subView = (DPVLogicalSubView) logical.getSubViewByName(subviewName);
-
+	  
       entities = subView.getEntities();                   // The list of entities for this subview.
-
+	  
                                                           // Get the preferences
       oracle.ide.config.Preferences p = oracle.ide.config.Preferences.getPreferences();
       Preferences prefs = Preferences.getInstance(p);
-
+	  
                                                           // Confirm the Action
       if(prefs.getConfirmation() == true)
       {
@@ -115,9 +118,7 @@ public class Wizard
           return false;
         }
       }
-                                                          // Create the file name
-      ;
-      
+
       outputFile = String.format("%s%s%s%s.%s", outputFile, System.getProperty("file.separator"), subviewName, 
                                 Util.kFilename, Util.kFileFilter);
 
@@ -146,21 +147,22 @@ public class Wizard
 	  row.createCell(cellNumber++).setCellValue("Attribute Is PK");
 	  row.createCell(cellNumber++).setCellValue("Attribute Is FK");
 	  row.createCell(cellNumber++).setCellValue("Attribute Required");  
-
 														// For every entity
 	  for (int counter = 0; counter < entities.size(); counter++)
 	  {
 		  Entity entity = (Entity) entities.get(counter);
 	  
 		  String entityName = entity.getName();
-
-		  List attributes = entity.getAttributes();
 		  
+		  List attributes = entity.getAttributes();
+
 		  if(attributes == null)
 			  continue;
 															//  .. and every attribute
 		  for (int i = 0; i < attributes.size(); i++)
 		  {
+			  Util.log("5-" + i);
+	  
 			  row = sheet.createRow(rowNum++);				// Create a new row
 
 			  cellNumber = 0;								// Reset the cell counter.		
