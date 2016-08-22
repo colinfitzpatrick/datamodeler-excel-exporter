@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project xmlns="antlib:org.apache.tools.ant" default="zip" name="Excel Exporter">
+<project xmlns="antlib:org.apache.tools.ant" default="zip" name="zip">
  
   <!-- Build Directories --> 
   <property name="src" location="src"/>
@@ -43,7 +43,7 @@
     <mkdir dir="${dist}"/>
  
     <!-- jar task modifies the bundle's manifest file -->
-    <zip destfile="${dist}/com.xsynergy.jl.ebo.jar-${version}-${build.number}.jar">
+    <zip destfile="${dist}/com.xsynergy.dm.excelexporter-${version}.${build.number}.jar">
      
       <fileset dir="${src}">
         <exclude name="**/*.java"/>

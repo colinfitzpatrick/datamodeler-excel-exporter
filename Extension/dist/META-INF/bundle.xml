@@ -1,0 +1,13 @@
+<update-bundle version="1.0" xmlns="http://xmlns.oracle.com/jdeveloper/updatebundle"
+               xmlns:u="http://xmlns.oracle.com/jdeveloper/update">
+  <u:update id="com.xsynergy.dm.excelexporter">
+    <u:name>Flat Excel Subview Exporter</u:name>
+    <u:version>0.1</u:version>
+    <u:author>Colin Fitzpatrick</u:author>
+    <u:author-url>http://www.xsynergy.com</u:author-url>
+    <u:requirements>
+      <u:requires-extension id="oracle.sqldeveloper" minVersion="12.1.2.0.40" maxVersion="12.9.0.0.40"/>
+    </u:requirements>
+    <u:description>An extension for Oracle SQL*Developer Data Modeler to export subviews to excel.</u:description>
+  </u:update>
+</update-bundle>
