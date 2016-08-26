@@ -2,15 +2,15 @@
 <project xmlns="antlib:org.apache.tools.ant" default="zip" name="zip">
  
   <!-- Build Directories --> 
-  <property name="src" location="src"/>
+  <property name="src" location="Extension/src"/>
   <property name="build" location="classes"/>
   <property name="dist" location="dist"/>
 
   <!-- Apache POI Jar -->
-  <property name="apachePOIjar" location="lib/poi-3.14-20160307.jar"/>
+  <property name="apachePOIjar" location="Extension/lib/poi-3.14-20160307.jar"/>
 
   <!-- bundle.xml template -->
-  <property name="bundleTemplate" location="resources/bundle.xml"/>
+  <property name="bundleTemplate" location="Extension/resources/bundle.xml"/>
 
   <!-- Location of Data Modeler to Source JAR files from -->
   <property name="datamodeler" location="C:/Program Files (x86)/datamodeler"/>
@@ -19,8 +19,13 @@
   <xmlproperty file="${src}/META-INF/extension.xml" /> 
   <property name="version" value="${extension(version)}" />
   
-  <buildnumber/>
-  
+  <!-- Git revision -->
+  <exec executable="git" outputproperty="git.revision">
+    <arg value="log" />
+    <arg value="-1" />
+    <arg value="--pretty=format:%h" />
+  </exec>   
+
   <!-- Setup the class path -->
   <path id="classpath">
     <pathelement location="${datamodeler}/ide/extensions/oracle.ide.jar"/>
@@ -43,7 +48,7 @@
     <mkdir dir="${dist}"/>
  
     <!-- jar task modifies the bundle's manifest file -->
-    <zip destfile="${dist}/com.xsynergy.dm.excelexporter-${version}.${build.number}.jar">
+    <zip destfile="${dist}/com.xsynergy.dm.excelexporter-${version}.${git.revision}.jar">
      
       <fileset dir="${src}">
         <exclude name="**/*.java"/>
@@ -62,12 +67,15 @@
     <!-- Ensure the Bundle Version, Matches the extension.xml file -->
     <replace file="${dist}/META-INF/bundle.xml" token="@VERSION@" value="${version}" />
     
-    <zip destfile="${dist}/flat-excel-subview-exporter-${version}.${build.number}.zip" basedir="${dist}"/>
+    <zip destfile="flat-excel-subview-exporter-${version}.${git.revision}.zip" basedir="${dist}"/>
   </target>
   
   <target name="clean" description="clean up">
     <delete dir="${build}"/>
     <delete dir="${dist}"/>
+    <delete>
+    	<fileset dir="." includes="*.zip"/>
+    </delete>
   </target>
   
 </project>
